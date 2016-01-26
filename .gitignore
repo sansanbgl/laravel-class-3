@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+/css
+/datatables
+/font
+/font-awesome-4.3.0
+/image
+/ionicons-2.0.1
+/js
+/trumbowyg
+/upload
+site.css
+.env
+composer.lock
