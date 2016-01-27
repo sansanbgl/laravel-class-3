@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lecturer;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 
-class LecturerController extends Controller
+class DosenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        //
+        $items = Dosen::get();
+        return view('pages.dosen.index', compact('items'));
     }
 
     /**
@@ -25,8 +26,8 @@ class LecturerController extends Controller
      */
     public function create()
     {
-        $items = new Lecturer;
-        return view('pages.lecturer.form', compact('items'));
+        $item = new Dosen;
+        return view('pages.dosen.create', compact('item'));
     }
 
     /**
@@ -37,7 +38,12 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dosen          = new Dosen;
+        $dosen->nip     = $request->nip;
+        $dosen->nama    = $request->nama;
+        $dosen->pangkat = $request->pangkat;
+        $dosen->save();
+        return redirect('dosen');
     }
 
     /**

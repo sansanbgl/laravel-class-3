@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>Dosen</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>Nama</td>
+				<td>{{$item->nama}}</td>
+			</tr>
+			<tr>
+				<td>NIP</td>
+				<td>{{$item->nip}}</td>
+			</tr>
+		</table>
+	</body>
+</html>

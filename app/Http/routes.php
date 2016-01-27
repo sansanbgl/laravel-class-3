@@ -9,11 +9,13 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('dosen', 'DosenController');
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +26,14 @@ Route::get('/', function () {
 | it contains. The "web" middleware group is defined in your HTTP
 | kernel and includes session state, CSRF protection, and more.
 |
-*/
+ */
 
 Route::group(['middleware' => ['web']], function () {
     //
+});
+
+// start here
+Route::get('testdosen', function () {
+    $item = \App\Models\Dosen::get()->first();
+    return view('dosen', compact('item'));
 });
