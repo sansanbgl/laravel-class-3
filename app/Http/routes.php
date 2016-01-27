@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('dosen', 'DosenController');
+// Route::resource('dosen', 'DosenController');
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,11 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 // start here
-Route::get('testdosen', function () {
-    $item = \App\Models\Dosen::get()->first();
-    return view('dosen', compact('item'));
-});
+// Route::get('testdosen', 'DosenController@testdosen');
+//
+Route::get('dosen/create', 'DosenController@create');
+Route::post('dosen/create', 'DosenController@store');
+Route::get('dosen', 'DosenController@index');
+Route::get('dosen/update/{id}', 'DosenController@update');
+Route::post('dosen/update/{id}', 'DosenController@patch');
+Route::get('dosen/delete/{id}', 'DosenController@delete');

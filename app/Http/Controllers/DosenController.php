@@ -4,90 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
-use Illuminate\Http\Request;
 
 class DosenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function testdosen()
     {
-        $items = Dosen::get();
-        return view('pages.dosen.index', compact('items'));
+        $item = \App\Models\Dosen::get()->first();
+        return view('dosen', compact('item'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $item = new Dosen;
-        return view('pages.dosen.create', compact('item'));
+        return view('dosen.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store()
     {
-        $dosen          = new Dosen;
-        $dosen->nip     = $request->nip;
-        $dosen->nama    = $request->nama;
-        $dosen->pangkat = $request->pangkat;
-        $dosen->save();
-        return redirect('dosen');
+        $item = Dosen::create(request()->all());
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function index()
     {
-        //
+        $items = Dosen::withTrashed()->get();
+        return view('dosen.index', compact('items'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update($id)
     {
-        //
+        $item = Dosen::findOrFail($id);
+        return view('dosen.update', compact('item'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function patch($id)
     {
-        //
+        $item = Dosen::findOrFail($id);
+        $item->update(request()->all());
+    }
+    public function delete($id)
+    {
+        $item = Dosen::findOrFail($id);
+        $item->delete();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
